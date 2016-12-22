@@ -3,23 +3,19 @@ node {
   def mvnHome = tool 'maven'
   stage ('CheckOut Code') {
     checkout scm
-/*    sh 'mvn package docker:package' */
   }
 
-  stage ('Compile/Package') {
-    sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package docker:package"
+  stage ('Compile/Test') {
+    sh "'${mvnHome}/bin/mvn' clean"
+    sh "'${mvnHome}/bin/mvn' test"
   }
 
   stage ('Unit-Tests') {
     echo 'Some Unit Tests when available'
   }
 
-  stage ('Coverage Checks') {
-    sh "'{mvnHome}/bin/mvn' -Dmaven test.failure.ignore report"
-  }
-
   stage ('FindSecBugs') {
-    echo 'Some FindSecBugs Tests when available'  
+    sh "'${mvnHome}/bin/mvn' findbugs:findbugs"  
   }
 
   stage ('Dependencys') {
@@ -28,6 +24,20 @@ node {
 
   stage ('Licences') {
     echo 'Some License Checks Tests when available'
+  }
+  
+  stage ('Coverage Checks') {
+    echo 'Some coverage Checks when available'
+    /*sh "'${mvnHome}/bin/mvn' org.jacoco:jacoco-maven-plugin:check"*/
+    /*sh "'${mvnHome}/bin/mvn' org.jacoco:jacoco-maven-plugin:report"*/
+  }
+  
+  stage ('Packaging') {
+    sh "'${mvnHome}/bin/mvn' package"
+  }
+  
+  stage ('Containererstellung') {
+    sh "'${mvnHome}/bin/mvn' docker:package"
   }
 }
 

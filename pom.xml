@@ -11,8 +11,14 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.10</version>
       <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+    <dependency>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.7.8</version>
     </dependency>
   </dependencies>
 <properties>
@@ -20,44 +26,94 @@
 </properties>
   <build>
     <finalName>test-webapp</finalName>
-<plugins>
-    <plugin>
-      <groupId>org.jacoco</groupId>
-      <artifactId>jacoco-maven-plugin</artifactId>
-      <version>0.7.9-SNAPSHOT</version>
-    </plugin>
-          <plugin>
-            <groupId>com.alexecollins.docker</groupId>
-            <artifactId>docker-maven-plugin</artifactId>
-            <version>${docker.maven.plugin.alexec.version}</version>
-            <configuration>
-              <removeIntermediateImages>true</removeIntermediateImages>
-              <cache>true</cache>
-            </configuration>
-            <executions>
-              <execution>
-                <id>package</id>
-                <goals>
-                  <goal>package</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>start</id>
-                <goals>
-                  <goal>start</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>stop</id>
-                <goals>
-                  <goal>stop</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-
-
-
-</plugins>
-  </build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.8</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                            </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules><!-- implementation is needed only for Maven 2 -->
+                                <rule implementation="org.jacoco.maven.RuleConfiguration">
+                                    <element>BUNDLE</element>
+                                    <limits><!-- implementation is needed only for Maven 2 -->
+                                        <limit implementation="org.jacoco.report.check.Limit">
+                                            <counter>COMPLEXITY</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.60</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.alexecollins.docker</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${docker.maven.plugin.alexec.version}</version>
+                <configuration>
+                  <removeIntermediateImages>true</removeIntermediateImages>
+                  <cache>true</cache>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>package</id>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>start</id>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop</id>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>3.0.4</version>
+                <configuration>
+                    <fork>true</fork>
+                    <effort>Max</effort>
+                    <threshold>Normal</threshold>
+                    <maxRank>9</maxRank>
+                    <xmlOutput>true</xmlOutput>
+                    <visitors></visitors>
+                    <timeout>3600000</timeout>
+                    <failOnError>true</failOnError>
+                    <findbugsXmlOutput>true</findbugsXmlOutput>
+                    <maxHeap>1024</maxHeap>
+                    <excludeFilterFile></excludeFilterFile>
+                    <includeFilterFile></includeFilterFile>
+                </configuration>
+             </plugin>
+        </plugins>
+    </build>
 </project>
