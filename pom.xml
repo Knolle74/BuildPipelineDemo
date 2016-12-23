@@ -20,6 +20,12 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>0.7.8</version>
     </dependency>
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.0.1</version>
+        <scope>provided</scope>
+    </dependency>
   </dependencies>
 <properties>
   <docker.maven.plugin.alexec.version>2.11.21</docker.maven.plugin.alexec.version>
