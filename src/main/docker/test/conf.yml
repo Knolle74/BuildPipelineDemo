@@ -5,7 +5,7 @@ ports:
   - 8080
 healthChecks:
   pings:
-    - url: http://localhost:8280/
+    - url: http://localhost:8080/
       timeout: 60000
 tag:
     olli/test:${project.version}
