@@ -48,7 +48,7 @@ public class Servlet1 extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private int calculate (int zahl1, int zahl 2) {
+	private int calculate (int zahl1, int zahl2) {
 		return zahl1+zahl2;
 	}
 
