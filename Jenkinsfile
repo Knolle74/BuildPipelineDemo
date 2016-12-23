@@ -14,7 +14,7 @@ node {
     echo 'Some Unit Tests when available'
   }
 
-  stage ('FindSecBugs') {
+  stage ('FindBugs') {
     sh "'${mvnHome}/bin/mvn' findbugs:findbugs"  
   }
 

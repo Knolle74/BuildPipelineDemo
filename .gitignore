@@ -1,2 +1,7 @@
 /build/
 /target/
+
+###Eclipse###
+.project
+.classpath
+/.settings/
