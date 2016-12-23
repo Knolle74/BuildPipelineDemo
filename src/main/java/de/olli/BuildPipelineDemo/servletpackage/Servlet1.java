@@ -47,5 +47,9 @@ public class Servlet1 extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	private int calculate (int zahl1, int zahl 2) {
+		return zahl1+zahl2;
+	}
 
 }
