@@ -7,11 +7,11 @@ node {
 
   stage ('Compile/Test') {
     sh "'${mvnHome}/bin/mvn' clean"
-    sh "'${mvnHome}/bin/mvn' test"
+    sh "'${mvnHome}/bin/mvn' compile"
   }
 
   stage ('Unit-Tests') {
-    echo 'Some Unit Tests when available'
+    sh "'${mvnHome}/bin/mvn' test"
   }
 
   stage ('FindBugs') {
