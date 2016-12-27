@@ -5,7 +5,7 @@ node {
     checkout scm
   }
 
-  stage ('Compile/Test') {
+  stage ('Compile') {
     sh "'${mvnHome}/bin/mvn' clean"
     sh "'${mvnHome}/bin/mvn' compile"
   }
@@ -18,6 +18,9 @@ node {
     sh "'${mvnHome}/bin/mvn' findbugs:findbugs"  
   }
 
+  stage ('FindSecBugs') {
+    sh "'${mvnHome}/bin/mvn' findbugs:findbugs"  
+  }
   stage ('Dependencys') {
     echo 'Some Dependecy Checks when available'
   }
