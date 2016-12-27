@@ -1,9 +1,8 @@
-package servletpackage;
+package de.olli.BuildPipelineDemo.servletpackage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +32,13 @@ public class Servlet1 extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int zahl1=Integer.parseInt(request.getParameter("int1"));
+		int zahl2=Integer.parseInt(request.getParameter("int2"));
 		out.println("<html>");
 		out.println("<h3> Hallo mein erstes Servlet meldet sich </h3>");
+	    out.println("Paramater 1 = " + request.getParameter("String1"));
+	    out.println("Paramater 2 = " + request.getParameter("String2"));
+		out.println(Calculator.calculate(zahl1, zahl2));
 		out.println("<a href='/BuildPipelineDemo/'>zurück</a>");
 	    out.println("</html>");
 	    out.close();
@@ -46,10 +50,6 @@ public class Servlet1 extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
-	
-	private int calculate (int zahl1, int zahl2) {
-		return zahl1+zahl2;
 	}
 
 }

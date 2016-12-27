@@ -1,4 +1,4 @@
-package beanpackage;
+package de.olli.BuildPipelineDemo.beanpackage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
