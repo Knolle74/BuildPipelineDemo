@@ -14,10 +14,6 @@ node {
     sh "'${mvnHome}/bin/mvn' test"
   }
 
-  stage ('FindBugs') {
-    sh "'${mvnHome}/bin/mvn' findbugs:findbugs"  
-  }
-
   stage ('FindSecBugs') {
     sh "'${mvnHome}/bin/mvn' findbugs:findbugs"  
   }
