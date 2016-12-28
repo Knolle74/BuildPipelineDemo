@@ -32,7 +32,7 @@ node {
   }
   
   stage ('Packaging') {
-    sh "'${mvnHome}/bin/mvn' package"
+    sh "'${mvnHome}/bin/mvn' war:war"
   }
   
   stage ('Containererstellung') {
