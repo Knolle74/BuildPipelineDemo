@@ -11,7 +11,7 @@ node {
 	
   stage ('Unit-Tests') {
 	sh "'${mvnHome}/bin/mvn' test"
-	archiveArtifacts TestResult: '**/target/surefire-reports/*.txt'
+	step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
   }
 }
 
