@@ -35,9 +35,9 @@ public class Servlet1 extends HttpServlet {
     int zahl2 = Integer.parseInt(request.getParameter("zahl2"));
     out.println("<html>");
     out.println("<h3> Hallo mein erstes Servlet meldet sich </h3>");
-    out.println("Paramater 1 = " + request.getParameter("String1"));
-    out.println("Paramater 2 = " + request.getParameter("String2"));
-    out.println(Calculator.calculate(zahl1, zahl2));
+    out.println("<p>Paramater 1 = " + request.getParameter("zahl1") + "</p>");
+    out.println("<p>Paramater 2 = " + request.getParameter("zahl2") + "</p>");
+    out.println("<p>Summe der Eingaben: " + Calculator.calculate(zahl1, zahl2) + "</p>");
     out.println("<a href='/BuildPipelineDemo/'>zurück</a>");
     out.println("</html>");
     out.close();
