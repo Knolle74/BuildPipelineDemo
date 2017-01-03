@@ -13,24 +13,26 @@ node {
   stage ('Unit-Tests') {
     sh "'${mvnHome}/bin/mvn' test"
   }
+}
 
-  stage ('FindSecBugs') {
+node {
+  def mvnHome = tool 'maven'
+  stage ('Security')
+  parallel 'FindSecBugs': {
     sh "'${mvnHome}/bin/mvn' findbugs:findbugs"  
-  }
-  stage ('Dependencys') {
+  }, 'Dependencies': {
     echo 'Some Dependecy Checks when available'
-  }
-
-  stage ('Licences') {
+  }, 'Licenses': {
     echo 'Some License Checks Tests when available'
-  }
-  
-  stage ('Coverage Checks') {
+  }, 'Code Coverage': {
     echo 'Some coverage Checks when available'
     /*sh "'${mvnHome}/bin/mvn' org.jacoco:jacoco-maven-plugin:check"*/
     /*sh "'${mvnHome}/bin/mvn' org.jacoco:jacoco-maven-plugin:report"*/
   }
-  
+}
+
+node {
+  def mvnHome = tool 'maven'  
   stage ('Packaging') {
     sh "'${mvnHome}/bin/mvn' war:war"
   }
