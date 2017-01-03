@@ -25,8 +25,8 @@ public class Servlet1Test {
 	
 	@Test
 	public void doGetTest() throws Exception {
-		request.setParameter("int1", "2");
-		request.setParameter("int2", "2");
+		request.setParameter("zahl1", "2");
+		request.setParameter("zahl2", "2");
 		servlet.doGet(request, response);
 		//assertEquals("Test", response.getContentAsString());
 		assertNotNull(response.getContentAsString());
