@@ -11,6 +11,7 @@ node {
 	
   stage ('Unit-Tests') {
 	sh "'${mvnHome}/bin/mvn' test"
+	archiveArtifacts TestResult: '**/target/surefire-reports/*.txt'
   }
 }
 
