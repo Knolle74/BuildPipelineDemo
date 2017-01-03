@@ -1,18 +1,20 @@
 /*Commit Stage*/
-node {
-  def mvnHome = tool 'maven'
-  stage ('CheckOut Code') {
-    checkout scm
-  }
-
-  stage ('Compile') {
-    sh "'${mvnHome}/bin/mvn' clean"
-    sh "'${mvnHome}/bin/mvn' compile"
-  }
-
-  stage ('Unit-Tests') {
-    sh "'${mvnHome}/bin/mvn' test"
-  }
+stage ('Commit Stage') {
+	node {
+	  def mvnHome = tool 'maven'
+	  stage ('CheckOut Code') {
+	    checkout scm
+	  }
+	
+	  stage ('Compile') {
+	    sh "'${mvnHome}/bin/mvn' clean"
+	    sh "'${mvnHome}/bin/mvn' compile"
+	  }
+	
+	  stage ('Unit-Tests') {
+	    sh "'${mvnHome}/bin/mvn' test"
+	  }
+	}
 }
 
 node {
