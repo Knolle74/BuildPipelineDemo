@@ -35,6 +35,7 @@ node {
   def mvnHome = tool 'maven'  
   stage ('Packaging') {
     sh "'${mvnHome}/bin/mvn' war:war"
+    step([$class: 'ArtifactArchiver', artifacts: '**/target/*.war', fingerprint: true])
   }
   
   stage ('Containererstellung') {
