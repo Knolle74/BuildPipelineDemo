@@ -1,10 +1,11 @@
 /*Commit Stage*/
-stage ('Commit Stage') {
-	node {
-	  def mvnHome = tool 'maven'
-	  stage ('CheckOut Code') {
+node {
+  def mvnHome = tool 'maven'
+  stage "Commit Stage"
+  
+  environment.inside {
+	  stage "CheckOut Code"
 	    checkout scm
-	  }
 	
 	  stage ('Compile') {
 	    sh "'${mvnHome}/bin/mvn' clean"
@@ -14,7 +15,7 @@ stage ('Commit Stage') {
 	  stage ('Unit-Tests') {
 	    sh "'${mvnHome}/bin/mvn' test"
 	  }
-	}
+  }
 }
 
 node {
