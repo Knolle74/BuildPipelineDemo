@@ -31,8 +31,8 @@ public class Servlet1 extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // TODO Auto-generated method stub
     PrintWriter out = response.getWriter();
-    int zahl1 = Integer.parseInt(request.getParameter("int1"));
-    int zahl2 = Integer.parseInt(request.getParameter("int2"));
+    int zahl1 = Integer.parseInt(request.getParameter("zahl1"));
+    int zahl2 = Integer.parseInt(request.getParameter("zahl2"));
     out.println("<html>");
     out.println("<h3> Hallo mein erstes Servlet meldet sich </h3>");
     out.println("Paramater 1 = " + request.getParameter("String1"));
